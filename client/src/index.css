@@ -3,5 +3,9 @@
 @tailwind utilities;
 
 body {
-    @apply bg-gray-50 dark:bg-gray-950;
+    @apply bg-gray-100 dark:bg-zinc-950;
+}
+
+[class*='_container'] {
+    @apply max-w-container mx-auto px-12;
 }
