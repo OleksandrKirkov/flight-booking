@@ -1,0 +1,4 @@
+.button_text {
+    @apply px-4 py-2 rounded-lg text-blue-400 dark:text-blue-400 transition-all hover:bg-sky-400 hover:bg-opacity-5
+        active:scale-95;
+}
