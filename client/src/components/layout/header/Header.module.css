@@ -1,0 +1,17 @@
+.header {}
+
+.header__container {
+    @apply bg-white dark:bg-zinc-900 flex justify-between items-center gap-4 py-4;
+}
+
+.logo {
+   @apply w-12 h-12; 
+}
+
+.logo img {
+    @apply max-w-full w-full;
+}
+
+.buttons {
+    @apply flex items-center gap-4;
+}
