@@ -1,6 +1,10 @@
+import Search from "./search/Search";
+
 const Home = () => {
     return (
-        <div className="">Home</div>
+        <div>
+            <Search />
+        </div>
     )
 }
 

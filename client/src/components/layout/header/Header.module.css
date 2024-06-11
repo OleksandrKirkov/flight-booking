@@ -1,7 +1,7 @@
 .header {}
 
 .header__container {
-    @apply bg-white dark:bg-zinc-900 flex justify-between items-center gap-4 py-4;
+    @apply bg-white dark:bg-zinc-900 flex justify-between items-center gap-4 py-4 border-b-2 border-solid border-zinc-200 dark:border-zinc-800;
 }
 
 .logo {
