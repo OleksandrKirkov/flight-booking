@@ -1,0 +1,4 @@
+.button_fill {
+    @apply px-4 py-2 rounded-lg text-white transition-all bg-gray-950 
+        hover:opacity-80 transition-opacity active:scale-95 transition-transform;
+}
