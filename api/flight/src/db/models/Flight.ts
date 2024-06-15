@@ -1,7 +1,12 @@
-import { Sequelize, DataTypes } from 'sequelize'
-import { connection } from 'db/config'
+import { DataTypes } from 'sequelize'
+import { connection } from '../config'
 
 export const Flight = connection.define('flight', {
+    id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
+    },
     model: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -21,5 +26,9 @@ export const Flight = connection.define('flight', {
     price: {
         type: DataTypes.INTEGER,
         allowNull: false,
-    }
+    },
+
+} , {
+    tableName: 'flight',
+    timestamps: false
 })
