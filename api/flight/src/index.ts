@@ -4,7 +4,7 @@ import cookieParser from "cookie-parser"
 import cors from "cors"
 import dotenv from "dotenv"
 import Fingerprint from "express-fingerprint"
-import { airlineRouter } from "./routes"
+import { airlineRouter, airportRouter, flightRouter } from "./routes"
 import {initializeDatabase} from "./db"
 import {Airline, Airport, Flight} from "./db/models"
 import {applyExtraSetup} from "./db/config/extra-setup"
@@ -25,13 +25,15 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 
 app.use( airlineRouter )
+app.use( airportRouter )
+app.use( flightRouter )
 
 app.listen(PORT, async () => {
     await initializeDatabase()
     
-    await Airline.sync({})
-    await Airport.sync({})
-    await Flight.sync({})
+    await Airline.sync({force: true, alter: true})
+    await Airport.sync({force: true, alter: true})
+    await Flight.sync({force: true, alter: true})
 
     await applyExtraSetup()
 
