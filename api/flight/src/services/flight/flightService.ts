@@ -1,3 +1,4 @@
+import {Op} from "sequelize"
 import {Airport, Flight} from "../../db/models"
 
 export interface IFlight {
@@ -41,10 +42,23 @@ export const createFlight = async ( data: IFlight ) => {
 }
 
 export const searchFlight = async ( data: ISearchFlight ) => {
-     return Flight.findAll({
+    const departureDate = new Date(data.departure_date)
+    const arrivalDate = new Date(data.departure_date)
+
+    const endDepartureDate = new Date(departureDate)
+    endDepartureDate.setDate(departureDate.getDate() + 2)
+
+    const endArrivalDate = new Date(arrivalDate)
+    endArrivalDate.setDate(arrivalDate.getDate() + 2)
+
+    return Flight.findAll({
         where: {
-          departure_date: data.departure_date,
-          arrival_date: data.arrival_date
+          departure_date: {
+              [Op.between]: [departureDate, endDepartureDate]
+          },
+          arrival_date: {
+              [Op.between]: [arrivalDate, endArrivalDate]
+          }
         },
         include: [
             {
