@@ -13,12 +13,12 @@ export const Flight = connection.define('flight', {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    departure_time: {
-        type: DataTypes.TIME,
+    departure_date: {
+        type: DataTypes.DATE,
         allowNull: false,
     },
-    arrival_time: {
-        type: DataTypes.TIME,
+    arrival_date: {
+        type: DataTypes.DATE,
         allowNull: false,
     },
     duration: {
