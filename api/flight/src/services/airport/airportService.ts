@@ -1,4 +1,4 @@
-import {Airport} from "db/models"
+import {Airport} from "../../db/models"
 
 export interface IAirport {
     name: string
@@ -7,7 +7,7 @@ export interface IAirport {
 }
 
 export const getAirport = async ( id: number ) => {
-    if( id ) {
+    if( !id ) {
         return Airport.findAll()
     }
 
@@ -19,9 +19,7 @@ export const createAirport = async ( data: IAirport ) => {
     await postObject.validate()
     await postObject.save()
 
-    console.log(postObject, " airport result")
-
     return {
-        ...postObject
+        ...postObject.dataValues
     }
 }

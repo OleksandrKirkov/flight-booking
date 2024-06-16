@@ -1,19 +1,26 @@
-import {Flight} from "db/models"
+import {Airport, Flight} from "../../db/models"
 
 export interface IFlight {
-    module: string
-    departure_time: Date
-    arrival_time: Date
+    model: string
+    departure_time: string
+    arrival_time: string
     duration: number
     price: number
+    airline_id: number
+    departure_id: number
+    arrival_id: number
 }
 
 export const getFlight = async ( id: number ) => {
     if( !id ) {
-        return Flight.findAll()
+        return Flight.findAll({include: [
+            "airline", 
+            {model: Airport, as: 'departure'},
+            {model: Airport, as: 'arrival'}
+        ]})
     }
 
-    return Flight.findOne({ where: { id } })
+    return Flight.findOne({ where: { id }, include: ["airline", "airport"] })
 }
 
 export const createFlight = async ( data: IFlight ) => {
@@ -21,9 +28,7 @@ export const createFlight = async ( data: IFlight ) => {
     await postObject.validate()
     await postObject.save()
 
-    console.log(postObject, " flight result")
-
     return {
-        ...postObject
+        ...postObject.dataValues
     }
 }

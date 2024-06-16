@@ -17,9 +17,7 @@ export const createAirline = async ( data: IAirline ) => {
     await postObject.validate()
     await postObject.save()
     
-    console.log(postObject, " airline result")
-
     return {
-        ...postObject
+        ...postObject.dataValues
     }
 }
