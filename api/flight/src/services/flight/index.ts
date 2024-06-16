@@ -1,1 +1,7 @@
-export { getFlight, createFlight, IFlight } from './flightService'
+export {
+    getFlight,
+    createFlight,
+    searchFlight,
+    IFlight,
+    ISearchFlight
+} from './flightService'

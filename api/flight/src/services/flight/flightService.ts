@@ -2,13 +2,20 @@ import {Airport, Flight} from "../../db/models"
 
 export interface IFlight {
     model: string
-    departure_time: string
-    arrival_time: string
+    departure_date: string
+    arrival_date: string
     duration: number
     price: number
     airline_id: number
     departure_id: number
     arrival_id: number
+}
+
+export interface ISearchFlight {
+    departure_city: string
+    arrival_city: string
+    departure_date: string
+    arrival_date: string
 }
 
 export const getFlight = async ( id: number ) => {
@@ -31,4 +38,29 @@ export const createFlight = async ( data: IFlight ) => {
     return {
         ...postObject.dataValues
     }
+}
+
+export const searchFlight = async ( data: ISearchFlight ) => {
+     return Flight.findAll({
+        where: {
+          departure_date: data.departure_date,
+          arrival_date: data.arrival_date
+        },
+        include: [
+            {
+                model: Airport,
+                as: 'departure',
+                where: {
+                   city: data.departure_city 
+                }
+            },
+            {
+                model: Airport,
+                as: 'arrival',
+                where: {
+                    city: data.arrival_city
+                }
+            }
+        ]
+    })
 }
