@@ -15,6 +15,7 @@ airlineRouter.post('/airline', (req, res, next) => {
 
     createAirline(data)
         .then(airline => res.status(201).json({ result: 201, airline }))
+        .catch(next)
 })
 
 export { airlineRouter }
