@@ -59,3 +59,11 @@
 .search__checkbox_input span {
     @apply w-3 h-3 rounded-full bg-blue-400 block opacity-0 transition-opacity;
 }
+
+.search__input {
+    @apply flex items-center gap-1; 
+}
+
+.search__input svg {
+    @apply shrink-0 text-xl text-blue-400;
+}

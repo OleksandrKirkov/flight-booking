@@ -1,11 +1,14 @@
-import {MdOutlineSwapHoriz} from "react-icons/md";
+import {MdOutlineSwapHoriz, MdToday} from "react-icons/md";
 import Container from "../../../layout/container/Container";
 import styles from "./Search.module.css"
 import {ButtonFill} from "../../../ui/buttons/Button";
 import {useState} from "react";
 import {Controller, SubmitHandler, useForm} from "react-hook-form"
 import {IFlightField, IFlightInput, flightFields} from "../../../../assets/forms/flightFields";
-import InputBorder from "../../../ui/inputs/textInput/inputBorder";
+import {LuPlaneLanding, LuPlaneTakeoff} from "react-icons/lu";
+import InputDefault from "../../../ui/inputs/textInput/inputDefault/InputDefault";
+
+const searchIcons = [<LuPlaneTakeoff/>, <LuPlaneLanding/>, <MdToday/>, <MdToday/>]
 
 const Search = () => {
     const [searchTypeState, setSearchTypeState] = useState<'one' | 'round'>('one')
@@ -44,20 +47,51 @@ const Search = () => {
                                 <div className={styles.search__block}>
                                     <label className={styles.search__block_label}>
                                         <span>{fieldData.name.charAt(0).toUpperCase() + fieldData.name.slice(1)}</span>
-                                        <Controller
-                                            key={index}
-                                            name={fieldData.name}
-                                            control={control}
-                                            rules={{
-                                                ...fieldData.options,
-                                            }}
-                                            render={({field}) => (
-                                                <InputBorder
-                                                    {...field}
-                                                    type={fieldData.type}
+                                        {fieldData.name == "arrival" ? (
+                                            <>
+                                            {searchTypeState == 'one' ? (
+                                                <p>Select round trip</p>
+                                            ) : (
+                                                <div className={styles.search__input}>
+                                                {searchIcons[index]}
+                                                <Controller
+                                                    key={index}
+                                                    name={fieldData.name}
+                                                    control={control}
+                                                    rules={{
+                                                        ...fieldData.options,
+                                                    }}
+                                                    render={({field}) => (
+                                                        <InputDefault
+                                                            {...field}
+                                                            type={fieldData.type}
+                                                            placeholder={fieldData.placeholder}
+                                                        />
+                                                    )}
                                                 />
+                                                </div>
                                             )}
-                                        ></Controller>
+                                            </>
+                                        ) : (
+                                            <div className={styles.search__input}>
+                                            {searchIcons[index]}
+                                            <Controller
+                                                key={index}
+                                                name={fieldData.name}
+                                                control={control}
+                                                rules={{
+                                                    ...fieldData.options,
+                                                }}
+                                                render={({field}) => (
+                                                    <InputDefault
+                                                        {...field}
+                                                        type={fieldData.type}
+                                                        placeholder={fieldData.placeholder}
+                                                    />
+                                                )}
+                                            />
+                                            </div>
+                                        )}
                                     </label>
                                     {
                                         index == 0 ? (
@@ -71,7 +105,7 @@ const Search = () => {
                         })
                     }
                     <div className={styles.search__block}>
-                        <ButtonFill>Search Flight</ButtonFill>
+                        <ButtonFill className="">Search Flight</ButtonFill>
                     </div>
                     </>
                 </Container>
