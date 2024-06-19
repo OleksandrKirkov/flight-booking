@@ -1,0 +1,28 @@
+.popup {
+    @apply absolute w-full h-full top-0 left-0;
+}
+
+.shadow {
+    @apply absolute w-full h-full top-0 left-0 bg-black opacity-50;
+}
+
+.window {
+    @apply max-w-md w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white
+        rounded-md p-8 flex flex-col gap-4;
+}
+
+.window__title {
+    @apply text-center text-3xl font-bold;
+}
+
+.window__close {
+    @apply absolute top-2 right-2 p-1 hover:text-red-500 transition-colors;
+}
+
+.window__input {
+    @apply p-2;
+}
+
+.button__submit {
+    @apply w-full;
+}
