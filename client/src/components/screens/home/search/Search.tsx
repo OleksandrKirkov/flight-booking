@@ -4,23 +4,32 @@ import styles from "./Search.module.css"
 import {ButtonFill} from "../../../ui/buttons/Button";
 import {useState} from "react";
 import {Controller, SubmitHandler, useForm} from "react-hook-form"
-import {IFlightField, IFlightInput, flightFields} from "../../../../assets/forms/flightFields";
+import {IFlightField, flightFields} from "../../../../assets/forms/flightFields";
 import {LuPlaneLanding, LuPlaneTakeoff} from "react-icons/lu";
 import InputDefault from "../../../ui/inputs/textInput/inputDefault/InputDefault";
+import {useSearchFlightQuery} from "../../../../services/flight/flight";
+import {ISearchFlight} from "../../../../services/flight/IFlight";
 
 const searchIcons = [<LuPlaneTakeoff/>, <LuPlaneLanding/>, <MdToday/>, <MdToday/>]
 
 const Search = () => {
     const [searchTypeState, setSearchTypeState] = useState<'one' | 'round'>('one')
+    const [searchDataState, setSearchDataState] = useState<ISearchFlight>({} as ISearchFlight)
+    const {data, isFetching} = useSearchFlightQuery(searchDataState)
 
     const defaultValues = flightFields.reduce((values, field) => {
-        values[field.name as keyof IFlightInput] = "";
+        values[field.name as keyof ISearchFlight] = "";
         return values
-    }, {} as IFlightInput);
+    }, {} as ISearchFlight);
 
-    const { control, handleSubmit, formState: {errors}, getValues } = useForm<IFlightInput>({defaultValues: defaultValues})
+    const { control, handleSubmit, formState: {errors}, getValues } = useForm<ISearchFlight>({defaultValues: defaultValues})
 
-    const onSubmit: SubmitHandler<IFlightInput> = (data) => console.log(data)
+    const onSubmit: SubmitHandler<ISearchFlight> = (data) => {
+        setSearchDataState(data)
+
+        console.log(isFetching)
+        console.log(data, 'data')
+    }
 
     return (
         <div className={styles.search}>
@@ -47,7 +56,7 @@ const Search = () => {
                                 <div className={styles.search__block}>
                                     <label className={styles.search__block_label}>
                                         <span>{fieldData.name.charAt(0).toUpperCase() + fieldData.name.slice(1)}</span>
-                                        {fieldData.name == "arrival" ? (
+                                        {fieldData.name == "arrival_date" ? (
                                             <>
                                             {searchTypeState == 'one' ? (
                                                 <p>Select round trip</p>
