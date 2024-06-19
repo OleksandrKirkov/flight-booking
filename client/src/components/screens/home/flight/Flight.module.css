@@ -1,5 +1,6 @@
 .flight {
-    @apply flex items-center justify-between gap-2 border-2 rounded-md p-4 bg-white mb-3;
+    @apply flex items-center justify-between gap-2 border-2 rounded-md p-4 bg-white 
+        dark:bg-zinc-900 dark:border-zinc-800 mb-3;
 }
 
 .flight__left {
@@ -7,7 +8,7 @@
 }
 
 .flight__airline_name {
-    
+    @apply text-black dark:text-white; 
 }
 
 .flight__model {
@@ -47,7 +48,7 @@
 }
 
 .flight__line {
-    @apply w-full bg-blue-100 rounded-sm h-[2px] flex items-center justify-between;
+    @apply w-full bg-blue-100 dark:bg-blue-300 rounded-sm h-[2px] flex items-center justify-between;
 }
 
 .flight__line span {
