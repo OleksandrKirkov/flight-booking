@@ -1,5 +1,9 @@
 .popup {
-    @apply absolute w-full h-full top-0 left-0;
+    @apply absolute w-full h-full top-0 left-0 opacity-0 pointer-events-none transition-opacity;
+}
+
+.popup.active {
+    @apply opacity-100 pointer-events-auto;
 }
 
 .shadow {

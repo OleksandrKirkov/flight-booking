@@ -5,8 +5,15 @@ import {Controller, SubmitHandler, useForm} from 'react-hook-form'
 import InputBorder from '../../ui/inputs/textInput/inputBorder/inputBorder'
 import {ButtonFill} from '../../ui/buttons/Button'
 import {IoMdClose} from 'react-icons/io'
+import {useDispatch, useSelector} from 'react-redux'
+import {RootState} from '../../../assets/store/store'
+import {closePopup} from '../../../assets/store/reducers/signInSlice'
 
 const SignIn = () => {
+
+    const popupState = useSelector((state: RootState) => state.signIn.popupState)
+
+    const despatch = useDispatch()
 
     const defaultValues = signInField.reduce((values, field) => {
         values[field.name as keyof IAuthInput] = "";
@@ -19,13 +26,19 @@ const SignIn = () => {
         console.log(data, " result data")         
     }
 
+    function closePopupHandler(e:any) {
+        e.preventDefault()
+
+        despatch(closePopup())
+    }
+
     return (
-        <div className={styles.popup}>
-            <div className={styles.shadow}></div>
+        <div className={`${styles.popup} ${popupState?styles.active:''}`}>
+            <div className={styles.shadow} onClick={closePopupHandler}></div>
 
             <form className={styles.window} onSubmit={handleSubmit(onSubmit)}>
                 <h3 className={styles.window__title}>Login</h3>
-                <button className={styles.window__close}><IoMdClose /></button>
+                <button className={styles.window__close} onClick={closePopupHandler}><IoMdClose /></button>
                 
                 {
                     signInField.map((fieldData, index) => {
