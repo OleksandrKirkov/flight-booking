@@ -1,6 +1,7 @@
 import {Outlet} from "react-router-dom"
 import Header from "./header/Header"
 import SignIn from "../popups/signIn/SignIn"
+import SignUp from "../popups/signUp/SignUp"
 
 const Layout = () => {
     return (
@@ -9,6 +10,7 @@ const Layout = () => {
             <Outlet />
 
             <SignIn />
+            <SignUp />
         </div>
     )
 }

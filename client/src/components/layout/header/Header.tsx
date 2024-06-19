@@ -3,16 +3,16 @@ import {useDispatch} from 'react-redux'
 import {ButtonText, ButtonBorder} from '../../ui/buttons/Button'
 import Container from '../container/Container'
 import styles from './Header.module.css'
-import {openPopup} from '../../../assets/store/reducers/signInSlice'
+import {IPopup, openPopup} from '../../../assets/store/reducers/popupSlice'
 
 const Header = () => {
 
     const dispatch = useDispatch()
 
-    function openPopupHandler(e:any) {
+    function openPopupHandler(e:any, popup: keyof IPopup) {
         e.preventDefault()
 
-        dispatch(openPopup())
+        dispatch(openPopup(popup))
     }
 
     return (
@@ -22,8 +22,8 @@ const Header = () => {
                     <img src="./logo/android-chrome-512x512.png" alt="logo" />
                 </a>
                 <div className={styles.buttons}>
-                    <ButtonText className='' onClick={openPopupHandler}>Login</ButtonText>
-                    <ButtonBorder className=''>Register</ButtonBorder>
+                    <ButtonText className='' onClick={e => openPopupHandler(e, 'signIn')}>Login</ButtonText>
+                    <ButtonBorder className='' onClick={e => openPopupHandler(e, 'signUp')}>Register</ButtonBorder>
                 </div>
             </Container>
         </header>

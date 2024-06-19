@@ -1,17 +1,16 @@
-import {useState} from 'react'
 import styles from './SignIn.module.css'
-import {IAuthField, IAuthInput, signInField} from '../../../assets/forms/authFields'
+import {IAuthInput, signInField} from '../../../assets/forms/authFields'
 import {Controller, SubmitHandler, useForm} from 'react-hook-form'
 import InputBorder from '../../ui/inputs/textInput/inputBorder/inputBorder'
 import {ButtonFill} from '../../ui/buttons/Button'
 import {IoMdClose} from 'react-icons/io'
 import {useDispatch, useSelector} from 'react-redux'
 import {RootState} from '../../../assets/store/store'
-import {closePopup} from '../../../assets/store/reducers/signInSlice'
+import {closePopup, getPopupState} from '../../../assets/store/reducers/popupSlice'
 
 const SignIn = () => {
 
-    const popupState = useSelector((state: RootState) => state.signIn.popupState)
+    const popupState = useSelector((state: RootState) => getPopupState(state, 'signIn'))
 
     const despatch = useDispatch()
 
@@ -29,7 +28,7 @@ const SignIn = () => {
     function closePopupHandler(e:any) {
         e.preventDefault()
 
-        despatch(closePopup())
+        despatch(closePopup('signIn'))
     }
 
     return (
