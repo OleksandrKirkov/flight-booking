@@ -9,7 +9,6 @@ export const flightSlice = createSlice({
     initialState,
     reducers: {
         updateFlight: (state, action: PayloadAction<IFlight[]>) => {
-            console.log(action, ' action')
             return action.payload            
         }
     }
