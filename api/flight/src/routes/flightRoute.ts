@@ -24,7 +24,7 @@ flightRouter.post('/flight', (req, res, next) => {
         })
 })
 
-flightRouter.get('/search-flight', (req, res, next) => {
+flightRouter.post('/search-flight', (req, res, next) => {
     const data: ISearchFlight = req.body
 
     searchFlight(data)

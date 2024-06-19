@@ -1,10 +1,12 @@
 import {configureStore} from "@reduxjs/toolkit";
 import {flightApi} from "../../services/flight/flight";
 import {setupListeners} from "@reduxjs/toolkit/query";
+import flightReducer from "./reducers/flightSlice"
 
 export const store = configureStore({
     reducer: {
         [flightApi.reducerPath]: flightApi.reducer,
+        flight: flightReducer,
     },
 
     middleware: (getDefaultMiddleware) =>
