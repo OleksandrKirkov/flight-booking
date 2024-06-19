@@ -6,7 +6,7 @@ import ButtonFill from "./buttonFill/ButtonFill";
 export interface IButton {
     children: ReactElement | ReactText
     className?: string | undefined
-    onClick: MouseEventHandler<HTMLButtonElement>
+    onClick?: MouseEventHandler<HTMLButtonElement>
 }
 
 export {
