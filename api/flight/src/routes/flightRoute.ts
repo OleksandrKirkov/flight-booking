@@ -25,7 +25,12 @@ flightRouter.post('/flight', (req, res, next) => {
 })
 
 flightRouter.get('/search-flight', (req, res, next) => {
-    const data: ISearchFlight = req.body
+    const data: ISearchFlight = {} as ISearchFlight
+
+    data.arrival_city = req.query.arrival_city.toString()
+    data.arrival_date = req.query.arrival_date.toString()
+    data.departure_city = req.query.departure_city.toString()
+    data.departure_date = req.query.departure_date.toString()
 
     searchFlight(data)
         .then(flight => res.status(201).json({ result: 201, flight }))

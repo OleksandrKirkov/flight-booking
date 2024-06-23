@@ -1,5 +1,5 @@
 import {Op} from "sequelize"
-import {Airport, Flight} from "../../db/models"
+import {Airline, Airport, Flight} from "../../db/models"
 
 export interface IFlight {
     model: string
@@ -61,6 +61,10 @@ export const searchFlight = async ( data: ISearchFlight ) => {
           }
         },
         include: [
+            {
+                model: Airline,
+                as: 'airline',
+            },
             {
                 model: Airport,
                 as: 'departure',
