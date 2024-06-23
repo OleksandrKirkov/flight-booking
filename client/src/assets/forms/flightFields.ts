@@ -1,12 +1,7 @@
-export interface IFlightInput {
-    from: string
-    to: string
-    departure: string
-    arrival: string
-}
+import {ISearchFlight} from "../../services/flight/IFlight"
 
 export interface IFlightField {
-    name: keyof IFlightInput,
+    name: keyof ISearchFlight,
     type: string,
     options: {
         required: string,
@@ -20,7 +15,7 @@ export interface IFlightField {
 
 export const flightFields: IFlightField[] = [
     {
-        name: "from",
+        name: "departure_city",
         type: "text",
         options: {
             required: "This field is required",
@@ -28,7 +23,7 @@ export const flightFields: IFlightField[] = [
         placeholder: "City"
     },
     {
-        name: "to",
+        name: "arrival_city",
         type: "text",
         options: {
             required: "This field is required",
@@ -36,7 +31,7 @@ export const flightFields: IFlightField[] = [
         placeholder: "City"
     },
     {
-        name: "departure",
+        name: "departure_date",
         type: "date",
         options: {
             required: "This field is required",
@@ -44,7 +39,7 @@ export const flightFields: IFlightField[] = [
         placeholder: "Date"
     },
     {
-        name: "arrival",
+        name: "arrival_date",
         type: "date",
         options: {
             required: "This field is required",

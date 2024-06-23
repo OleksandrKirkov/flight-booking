@@ -1,0 +1,3 @@
+.input__default {
+    @apply block w-full border-none bg-transparent;
+}

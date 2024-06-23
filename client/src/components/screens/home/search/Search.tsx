@@ -1,23 +1,38 @@
-import {MdOutlineSwapHoriz} from "react-icons/md";
+import {MdOutlineSwapHoriz, MdToday} from "react-icons/md";
 import Container from "../../../layout/container/Container";
 import styles from "./Search.module.css"
 import {ButtonFill} from "../../../ui/buttons/Button";
 import {useState} from "react";
 import {Controller, SubmitHandler, useForm} from "react-hook-form"
-import {IFlightField, IFlightInput, flightFields} from "../../../../assets/forms/flightFields";
-import InputBorder from "../../../ui/inputs/textInput/inputBorder";
+import {IFlightField, flightFields} from "../../../../assets/forms/flightFields";
+import {LuPlaneLanding, LuPlaneTakeoff} from "react-icons/lu";
+import InputDefault from "../../../ui/inputs/textInput/inputDefault/InputDefault";
+import {useSearchFlightQuery} from "../../../../services/flight/flight";
+import {ISearchFlight} from "../../../../services/flight/IFlight";
+import {useAppDispatch, useAppSelector} from "../../../../assets/hooks/useRedux";
+import {updateFlight} from "../../../../assets/store/reducers/flightSlice";
+
+const searchIcons = [<LuPlaneTakeoff/>, <LuPlaneLanding/>, <MdToday/>, <MdToday/>]
 
 const Search = () => {
     const [searchTypeState, setSearchTypeState] = useState<'one' | 'round'>('one')
+    const [searchDataState, setSearchDataState] = useState<ISearchFlight>({} as ISearchFlight)
+    const {data: flightResult, error, isLoading} = useSearchFlightQuery(searchDataState)
+
+    const dispatch = useAppDispatch()
 
     const defaultValues = flightFields.reduce((values, field) => {
-        values[field.name as keyof IFlightInput] = "";
+        values[field.name as keyof ISearchFlight] = "";
         return values
-    }, {} as IFlightInput);
+    }, {} as ISearchFlight);
 
-    const { control, handleSubmit, formState: {errors}, getValues } = useForm<IFlightInput>({defaultValues: defaultValues})
+    const { control, handleSubmit, formState: {errors}, getValues } = useForm<ISearchFlight>({defaultValues: defaultValues})
 
-    const onSubmit: SubmitHandler<IFlightInput> = (data) => console.log(data)
+    const onSubmit: SubmitHandler<ISearchFlight> = (data) => {
+        setSearchDataState(data)
+
+        if(flightResult) dispatch(updateFlight(flightResult))
+    }
 
     return (
         <div className={styles.search}>
@@ -44,20 +59,51 @@ const Search = () => {
                                 <div className={styles.search__block}>
                                     <label className={styles.search__block_label}>
                                         <span>{fieldData.name.charAt(0).toUpperCase() + fieldData.name.slice(1)}</span>
-                                        <Controller
-                                            key={index}
-                                            name={fieldData.name}
-                                            control={control}
-                                            rules={{
-                                                ...fieldData.options,
-                                            }}
-                                            render={({field}) => (
-                                                <InputBorder
-                                                    {...field}
-                                                    type={fieldData.type}
+                                        {fieldData.name == "arrival_date" ? (
+                                            <>
+                                            {searchTypeState == 'one' ? (
+                                                <p>Select round trip</p>
+                                            ) : (
+                                                <div className={styles.search__input}>
+                                                {searchIcons[index]}
+                                                <Controller
+                                                    key={index}
+                                                    name={fieldData.name}
+                                                    control={control}
+                                                    rules={{
+                                                        ...fieldData.options,
+                                                    }}
+                                                    render={({field}) => (
+                                                        <InputDefault
+                                                            {...field}
+                                                            type={fieldData.type}
+                                                            placeholder={fieldData.placeholder}
+                                                        />
+                                                    )}
                                                 />
+                                                </div>
                                             )}
-                                        ></Controller>
+                                            </>
+                                        ) : (
+                                            <div className={styles.search__input}>
+                                            {searchIcons[index]}
+                                            <Controller
+                                                key={index}
+                                                name={fieldData.name}
+                                                control={control}
+                                                rules={{
+                                                    ...fieldData.options,
+                                                }}
+                                                render={({field}) => (
+                                                    <InputDefault
+                                                        {...field}
+                                                        type={fieldData.type}
+                                                        placeholder={fieldData.placeholder}
+                                                    />
+                                                )}
+                                            />
+                                            </div>
+                                        )}
                                     </label>
                                     {
                                         index == 0 ? (
@@ -71,7 +117,7 @@ const Search = () => {
                         })
                     }
                     <div className={styles.search__block}>
-                        <ButtonFill>Search Flight</ButtonFill>
+                        <ButtonFill className="">Search Flight</ButtonFill>
                     </div>
                     </>
                 </Container>
