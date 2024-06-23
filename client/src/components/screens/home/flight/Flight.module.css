@@ -1,0 +1,68 @@
+.flight {
+    @apply flex items-center justify-between gap-2 border-2 rounded-md p-4 bg-white 
+        dark:bg-zinc-900 dark:border-zinc-800 mb-3;
+}
+
+.flight__left {
+    @apply flex flex-col;
+}
+
+.flight__airline_name {
+    @apply text-black dark:text-white; 
+}
+
+.flight__model {
+    @apply text-xs text-zinc-400;
+}
+
+.flight__center {
+    @apply flex items-center justify-center gap-3 w-1/3;
+}
+
+.flight__date {
+    @apply text-xs text-zinc-400;
+}
+
+.flight__info {
+    @apply w-full flex flex-col gap-2;
+}
+
+.flight__data {
+    @apply flex items-center justify-between gap-2 text-zinc-400 dark:text-zinc-100;
+}
+
+.flight__duration {
+    @apply text-sm text-zinc-400;
+}
+
+.flight__duration span {
+    @apply text-black font-semibold;
+}
+
+.flight__country {
+    @apply text-xs text-black dark:text-white font-semibold;
+}
+
+.flight__data_text {
+    @apply text-xs;
+}
+
+.flight__line {
+    @apply w-full bg-blue-100 dark:bg-blue-300 rounded-sm h-[2px] flex items-center justify-between;
+}
+
+.flight__line span {
+    @apply w-1/4 h-[3px] bg-blue-400 rounded-sm;
+}
+
+.flight__right {
+    @apply flex items-center gap-2;
+}
+
+.flight__price {
+    @apply font-semibold text-2xl text-orange-400;
+}
+
+.flight__button {
+    @apply text-xs
+}

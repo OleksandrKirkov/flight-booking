@@ -1,3 +1,0 @@
-.input_border {
-    @apply border-[2px] border-solid border-zinc-200 dark:border-zinc-800 rounded-sm;
-}

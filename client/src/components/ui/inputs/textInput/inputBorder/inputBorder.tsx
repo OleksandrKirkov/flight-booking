@@ -9,7 +9,7 @@ export interface IInput {
 
 const InputBorder = (data:any) => {
     return (
-        <input className={styles.input_border} {...data} />
+        <input {...data} className={`${styles.input_border} ${data.className?data.className:''}`} />
     )
 }
 
