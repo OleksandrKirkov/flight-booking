@@ -6,12 +6,18 @@ export const flightApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: 'http://localhost:3000/'}),
     endpoints: (builder) => ({
         searchFlight: builder.query<IFlight[], ISearchFlight>({
-            query: (data) => ({
-                url: 'search-flight',
-                body: data,
-                method: 'POST'
-            }),
-            transformResponse: (response: {data: IFlight[]}, meta, arg) => response.data
+            query: (data) => {
+                const baseUrl = 'search-flight'
+
+                const queryParams = new URLSearchParams(data as any).toString()
+
+                return {
+                    url: `${baseUrl}?${queryParams}`,
+                }
+            },
+            transformResponse: (rawResult: { result: number; flight: IFlight[]}) => {
+                return rawResult.flight
+            }
         })
     }) 
 })

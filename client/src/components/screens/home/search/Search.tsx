@@ -9,13 +9,17 @@ import {LuPlaneLanding, LuPlaneTakeoff} from "react-icons/lu";
 import InputDefault from "../../../ui/inputs/textInput/inputDefault/InputDefault";
 import {useSearchFlightQuery} from "../../../../services/flight/flight";
 import {ISearchFlight} from "../../../../services/flight/IFlight";
+import {useAppDispatch, useAppSelector} from "../../../../assets/hooks/useRedux";
+import {updateFlight} from "../../../../assets/store/reducers/flightSlice";
 
 const searchIcons = [<LuPlaneTakeoff/>, <LuPlaneLanding/>, <MdToday/>, <MdToday/>]
 
 const Search = () => {
     const [searchTypeState, setSearchTypeState] = useState<'one' | 'round'>('one')
     const [searchDataState, setSearchDataState] = useState<ISearchFlight>({} as ISearchFlight)
-    const {data, isFetching} = useSearchFlightQuery(searchDataState)
+    const {data: flightResult, error, isLoading} = useSearchFlightQuery(searchDataState)
+
+    const dispatch = useAppDispatch()
 
     const defaultValues = flightFields.reduce((values, field) => {
         values[field.name as keyof ISearchFlight] = "";
@@ -27,8 +31,7 @@ const Search = () => {
     const onSubmit: SubmitHandler<ISearchFlight> = (data) => {
         setSearchDataState(data)
 
-        console.log(isFetching)
-        console.log(data, 'data')
+        if(flightResult) dispatch(updateFlight(flightResult))
     }
 
     return (

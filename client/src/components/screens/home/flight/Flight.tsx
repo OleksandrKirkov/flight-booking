@@ -14,11 +14,11 @@ const Flight:FC<IFlight> = (data) => {
     return (
         <div className={styles.flight}>
             <div className={styles.flight__left}>
-                <h2 className={styles.flight__airline_name}>{flightResult.airline.name}</h2>
+                <h2 className={styles.flight__airline_name}>{flightResult.airline?.name}</h2>
                 <p className={styles.flight__model}>{flightResult.model}</p>
             </div>
             <div className={styles.flight__center}>
-                <p className={styles.flight__date}>{flightResult.departure_date}</p>
+                <p className={styles.flight__date}>{flightResult.departure_date?.split('T')[0]}</p>
                 
                 <div className={styles.flight__info}>
                     <div className={styles.flight__data}>
@@ -33,13 +33,13 @@ const Flight:FC<IFlight> = (data) => {
                         <span></span>
                     </div>
                     <div className={styles.flight__data}>
-                        <p className={styles.flight__country}>{flightResult.departure.country}</p>
+                        <p className={styles.flight__country}>{flightResult.departure?.country}</p>
                         <p className={styles.flight__data_text}>Direct</p>
-                        <p className={styles.flight__country}>{flightResult.arrival.country}</p>
+                        <p className={styles.flight__country}>{flightResult.arrival?.country}</p>
                     </div>
                 </div>
 
-                <p className={styles.flight__date}>{flightResult.arrival_date}</p>
+                <p className={styles.flight__date}>{flightResult.arrival_date?.split('T')[0]}</p>
             </div>
             <div className={styles.flight__right}>
                 <p className={styles.flight__price}>US$ {flightResult.price}</p>
