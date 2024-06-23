@@ -4,6 +4,9 @@ import cookieParser from "cookie-parser"
 import cors from "cors"
 import dotenv from "dotenv"
 import Fingerprint from "express-fingerprint"
+import mongoose from "mongoose"
+import router from "router"
+import errorMiddleware from "middleware/errorMiddleware"
 
 dotenv.config()
 
@@ -20,6 +23,15 @@ app.use(Fingerprint())
 app.use(cookieParser())
 app.use(bodyParser.json())
 
-app.listen(PORT, () => {
-    console.log(`[server]: Server is running at http://localhost:${PORT}`)
+app.use('/api', router)
+app.use(errorMiddleware)
+
+app.listen(PORT, async () => {
+    try {
+        await mongoose.connect(process.env.DB_URL)
+
+        console.log(`[server]: Server is running at http://localhost:${PORT}`)
+    } catch( error ) {
+        console.log(`[error]: ${error}`)     
+    }
 })
