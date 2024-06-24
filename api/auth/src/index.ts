@@ -5,8 +5,8 @@ import cors from "cors"
 import dotenv from "dotenv"
 import Fingerprint from "express-fingerprint"
 import mongoose from "mongoose"
-import router from "router"
-import errorMiddleware from "middleware/errorMiddleware"
+import router from "./router"
+import errorMiddleware from "./middleware/errorMiddleware"
 
 dotenv.config()
 

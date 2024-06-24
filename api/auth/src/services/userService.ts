@@ -1,8 +1,8 @@
-import userModel from "models/userModel";
+import userModel from "../models/userModel";
 import bcrypt from "bcrypt";
 import tokenService from "./tokenService";
-import { IUser, UserDTO } from "dtos/userDTO";
-import { ApiError } from "exceptions/apiError";
+import { IUser, UserDTO } from "../dtos/userDTO";
+import { ApiError } from "../exceptions/apiError";
 
 class userService {
     async registration(email: string, password: string) {
@@ -18,7 +18,7 @@ class userService {
         
         const userDTO = new UserDTO(user)
         const tokens = tokenService.generateToken({...userDTO})
-        await tokenService.saveToken(userDTO.id, tokens.refreshToken)
+        await tokenService.saveToken(parseInt(userDTO.id), tokens.refreshToken)
 
         return {...tokens, user: userDTO}
     }
@@ -39,7 +39,7 @@ class userService {
         const userDTO = new UserDTO(user);
         const tokens = tokenService.generateToken({...userDTO})
 
-        await tokenService.saveToken(userDTO.id, tokens.refreshToken)
+        await tokenService.saveToken(parseInt(userDTO.id), tokens.refreshToken)
         return  {...tokens, user: UserDTO}
     }
 
@@ -64,7 +64,7 @@ class userService {
         const userDTO = new UserDTO(user)
         const tokens = tokenService.generateToken({...userDTO})
 
-        await tokenService.saveToken(userDTO.id, tokens.refreshToken)
+        await tokenService.saveToken(parseInt(userDTO.id), tokens.refreshToken)
         return {...tokens, user: userDTO.id}
     }
 

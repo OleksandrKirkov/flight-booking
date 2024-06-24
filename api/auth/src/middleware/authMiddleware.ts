@@ -1,8 +1,12 @@
-import {ApiError} from "exceptions/apiError";
+import {ApiError} from "../exceptions/apiError";
 import {Request, Response, NextFunction} from "express";
-import tokenService from "services/tokenService";
+import tokenService from "../services/tokenService";
 
-export default function (req: Request, res: Response, next: NextFunction) {
+interface RequestWithUser extends Request {
+    user?: any;
+}
+
+export default function (req: RequestWithUser, res: Response, next: NextFunction) {
     try {
         const authorizationHeader = req.headers.authorization;
         if(!authorizationHeader) {

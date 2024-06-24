@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import tokenModel from "models/tokenModel";
+import tokenModel from "../models/tokenModel";
 import {ACCESS_TOKEN_EXPIRATION, REFRESH_TOKEN_EXPIRATION} from "../../constants"
 
 class TokenService {

@@ -1,6 +1,6 @@
-import userService from "services/userService";
+import userService from "../services/userService";
 import {validationResult} from "express-validator";
-import { ApiError } from "exceptions/apiError";
+import { ApiError } from "../exceptions/apiError";
 import {NextFunction, Request, Response} from "express";
 import {COOKIE_SETTINGS} from "../../constants";
 
