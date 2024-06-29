@@ -1,0 +1,70 @@
+.tickets {
+    @apply flex flex-col gap-4 pt-4 w-full;
+}
+
+.tickets__ticket {
+    @apply flex items-center justify-between gap-4 dark:bg-zinc-900 border 
+        border-solid border-zinc-800 rounded-md p-4;
+}
+
+.ticket__left {}
+
+.ticket__airline {
+    @apply text-lg text-black dark:text-white;
+}
+
+.ticket__model {
+    @apply text-xs text-zinc-900 dark:text-zinc-400;
+}
+
+.ticket__center {
+    @apply flex justify-center gap-4 items-center;
+}
+
+.ticket__date {
+    @apply text-zinc-400 dark:text-zinc-400 text-sm;
+}
+
+.ticket__info {
+    @apply flex flex-col gap-1;
+}
+
+.ticket__data {
+    @apply flex items-center gap-2 text-black dark:text-white justify-between;
+}
+
+.ticket__duration {
+    @apply text-zinc-400;
+}
+
+.ticket__duration span {
+    @apply text-black dark:text-white;
+}
+
+.ticket__line {
+    @apply w-full bg-blue-100 dark:bg-blue-300 rounded-sm h-[2px] flex items-center justify-between;
+}
+
+.ticket__line span {
+    @apply w-1/4 h-[3px] bg-blue-400 rounded-sm;
+}
+
+.ticket__airport {
+    @apply text-sm;
+}
+
+.ticket__text {
+    @apply text-xs;
+}
+
+.ticket__right {
+    @apply flex items-center gap-2;
+}
+
+.ticket__price {
+    @apply font-semibold text-2xl text-orange-400;
+}
+
+.ticket__button {
+    @apply text-xs
+}
