@@ -3,7 +3,7 @@ import {FC, ReactElement, ReactText} from "react"
 
 interface IContainer {
     children: ReactElement | ReactElement[]
-    className: string | undefined
+    className?: string | undefined
 }
 
 const Container:FC<IContainer> = ({children, className = undefined}) => {
