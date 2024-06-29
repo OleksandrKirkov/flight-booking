@@ -5,7 +5,7 @@ import SignUp from "../popups/signUp/SignUp"
 
 const Layout = () => {
     return (
-        <div className="h-[100vh]">
+        <div className="h-[100vh] flex flex-col">
             <Header />
             <Outlet />
 

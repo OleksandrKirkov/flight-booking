@@ -1,5 +1,6 @@
 .sidebar {
-    @apply bg-white h-full;
+    @apply bg-white dark:bg-zinc-900 h-full pt-4 border-r border-solid border-zinc-800;
+    flex: 0 0 auto;
 }
 
 .sidebar__list {
@@ -9,5 +10,5 @@
 .sidebar__item {}
 
 .sidebar__link {
-    @apply w-full p-12 block py-2 hover:bg-zinc-300 transition-colors;
+    @apply w-full p-12 block py-2 text-black dark:text-white hover:bg-zinc-300 dark:hover:bg-zinc-800 transition-colors;
 }
