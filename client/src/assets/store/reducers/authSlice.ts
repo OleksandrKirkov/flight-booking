@@ -1,6 +1,7 @@
 import {PayloadAction, createSlice} from "@reduxjs/toolkit";
-import {IUser} from "../../../services/auth/IAuth";
+import {ISignIn, IUser} from "../../../services/auth/IAuth";
 import {RootState} from "../store";
+import {useLoginMutation} from "../../../services/auth/auth";
 
 const initialState: IUser = {} as IUser
 
@@ -10,7 +11,7 @@ export const authSlice = createSlice({
     reducers: {
         updateUser: (state, action: PayloadAction<IUser>) => {
             return action.payload
-        }
+        },
     }
 })
 
