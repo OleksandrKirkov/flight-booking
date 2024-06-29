@@ -1,0 +1,13 @@
+.sidebar {
+    @apply bg-white h-full;
+}
+
+.sidebar__list {
+    @apply flex flex-col;
+}
+
+.sidebar__item {}
+
+.sidebar__link {
+    @apply w-full p-12 block py-2 hover:bg-zinc-300 transition-colors;
+}
