@@ -23,7 +23,7 @@ app.use(Fingerprint())
 app.use(cookieParser())
 app.use(bodyParser.json())
 
-app.use('/api', router)
+app.use('/auth', router)
 app.use(errorMiddleware)
 
 app.listen(PORT, async () => {

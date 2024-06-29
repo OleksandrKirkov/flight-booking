@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 import tokenModel from "../models/tokenModel";
 import {ACCESS_TOKEN_EXPIRATION, REFRESH_TOKEN_EXPIRATION} from "../../constants"
+import mongoose from "mongoose";
 
 class TokenService {
     generateToken(payload: string | object) {
@@ -33,7 +34,8 @@ class TokenService {
         }
     }
 
-    async saveToken(userId: number, refreshToken: string) {
+    async saveToken(userId: mongoose.Types.ObjectId, refreshToken: string) {
+
         const tokenData = await tokenModel.findOne({user: userId})
 
         if(tokenData) {
@@ -41,7 +43,7 @@ class TokenService {
             return tokenData.save();
         }
 
-        const token = await tokenModel.create({user: userId, refreshToken})
+        const token = await tokenModel.create({user: new mongoose.Types.ObjectId(userId), refreshToken})
         return token;
     }
 

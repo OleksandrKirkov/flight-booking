@@ -8,5 +8,5 @@ export default function (err: ErrorRequestHandler, req: Request, res: Response, 
         return res.status(err.status).json({message: err.message, errors: err.errors})
     }
 
-    return res.status(500).json({message: 'Непередбачувана помилка'})
+    return res.status(500).json({message: 'Непередбачувана помилка', err})
 }

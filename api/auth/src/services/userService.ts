@@ -18,7 +18,7 @@ class userService {
         
         const userDTO = new UserDTO(user)
         const tokens = tokenService.generateToken({...userDTO})
-        await tokenService.saveToken(parseInt(userDTO.id), tokens.refreshToken)
+        await tokenService.saveToken(userDTO.id, tokens.refreshToken)
 
         return {...tokens, user: userDTO}
     }
@@ -39,7 +39,7 @@ class userService {
         const userDTO = new UserDTO(user);
         const tokens = tokenService.generateToken({...userDTO})
 
-        await tokenService.saveToken(parseInt(userDTO.id), tokens.refreshToken)
+        await tokenService.saveToken(userDTO.id, tokens.refreshToken)
         return  {...tokens, user: UserDTO}
     }
 
@@ -64,7 +64,7 @@ class userService {
         const userDTO = new UserDTO(user)
         const tokens = tokenService.generateToken({...userDTO})
 
-        await tokenService.saveToken(parseInt(userDTO.id), tokens.refreshToken)
+        await tokenService.saveToken(userDTO.id, tokens.refreshToken)
         return {...tokens, user: userDTO.id}
     }
 
