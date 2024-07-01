@@ -3,8 +3,8 @@
 }
 
 .tickets__ticket {
-    @apply flex items-center justify-between gap-4 dark:bg-zinc-900 border 
-        border-solid border-zinc-800 rounded-md p-4;
+    @apply flex items-center justify-between gap-4 bg-white dark:bg-zinc-900 border-2 
+        border-solid border-zinc-200 dark:border-zinc-800 rounded-md p-4;
 }
 
 .ticket__left {}

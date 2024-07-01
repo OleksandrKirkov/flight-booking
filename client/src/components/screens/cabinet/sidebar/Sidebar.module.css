@@ -1,5 +1,5 @@
 .sidebar {
-    @apply bg-white dark:bg-zinc-900 h-full pt-4 border-r border-solid border-zinc-800;
+    @apply bg-white dark:bg-zinc-900 h-full pt-4 border-r-2 border-solid border-zinc-200 dark:border-zinc-800;
     flex: 0 0 auto;
 }
 
