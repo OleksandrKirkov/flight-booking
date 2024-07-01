@@ -31,9 +31,9 @@ app.use( flightRouter )
 app.listen(PORT, async () => {
     await initializeDatabase()
     
-    await Airline.sync({force: true, alter: true})
-    await Airport.sync({force: true, alter: true})
-    await Flight.sync({force: true, alter: true})
+    await Airline.sync({force: true})
+    await Airport.sync({force: true})
+    await Flight.sync({force: true})
 
     await applyExtraSetup()
 

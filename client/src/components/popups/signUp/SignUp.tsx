@@ -7,12 +7,19 @@ import styles from "./SignUp.module.css"
 import {useDispatch, useSelector} from "react-redux";
 import { RootState } from "../../../assets/store/store";
 import {closePopup, getPopupState} from "../../../assets/store/reducers/popupSlice";
+import {useState} from "react";
+import {ISignUp} from "../../../services/auth/IAuth";
+import {useRegisterMutation} from "../../../services/auth/auth";
 
 const SignUp = () => {
+
+    const [authState, setAuthState] = useState<ISignUp>({} as ISignUp)
 
     const popupState = useSelector((state: RootState) => getPopupState(state, 'signUp'))
 
     const dispatch = useDispatch()
+
+    const [register, {data: userResult, error, isLoading}] = useRegisterMutation()
 
     const defaultValues = signUpFields.reduce((values, field) => {
         values[field.name as keyof IAuthInput] = "";
@@ -21,8 +28,17 @@ const SignUp = () => {
 
     const {control, handleSubmit, formState: {errors}, getValues} = useForm<IAuthInput>({defaultValues: defaultValues})
 
-    const onSubmit: SubmitHandler<IAuthInput> = (data) => {
-        console.log(data, " result data")
+    const onSubmit: SubmitHandler<IAuthInput> = async (data) => {
+        try {
+            console.log("register")
+            setAuthState(data)
+            await register(data).unwrap()
+
+            if(userResult) console.log(userResult)
+            else console.log(error)
+        } catch (error) {
+                console.error(error)
+            }
     }
 
     function closePopupHandler(e:any) {

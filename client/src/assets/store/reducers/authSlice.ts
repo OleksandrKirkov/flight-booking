@@ -1,21 +1,31 @@
 import {PayloadAction, createSlice} from "@reduxjs/toolkit";
 import {ISignIn, IUser} from "../../../services/auth/IAuth";
 import {RootState} from "../store";
-import {useLoginMutation} from "../../../services/auth/auth";
 
-const initialState: IUser = {} as IUser
+interface IAuthState {
+    token: string | null;
+    user: IUser;
+}
+
+const initialState: IAuthState = {} as IAuthState
 
 export const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {
-        updateUser: (state, action: PayloadAction<IUser>) => {
-            return action.payload
+        setCredentials: (state, action: PayloadAction<{token: string; user: IUser}>) => {
+            const {token, user} = action.payload
+            state.token = token
+            state.user = user
         },
+        logout: (state) => {
+            state.token = null
+            state.user = {} as IUser
+        }
     }
 })
 
-export const { updateUser } = authSlice.actions
+export const { setCredentials, logout } = authSlice.actions
 
 export const authResult = (state: RootState) => state.auth
 

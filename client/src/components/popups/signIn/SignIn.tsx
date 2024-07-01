@@ -7,13 +7,12 @@ import {IoMdClose} from 'react-icons/io'
 import {useDispatch, useSelector} from 'react-redux'
 import {RootState} from '../../../assets/store/store'
 import {closePopup, getPopupState} from '../../../assets/store/reducers/popupSlice'
-import {useState} from 'react'
+import {FC, useState} from 'react'
 import {ISignIn, IUser} from '../../../services/auth/IAuth'
-//import {useLoginMutation} from '../../../services/auth/auth'
-import {updateUser} from '../../../assets/store/reducers/authSlice'
+import {useLoginMutation} from '../../../services/auth/auth'
 import {useAppDispatch} from '../../../assets/hooks/useRedux'
 
-const SignIn = () => {
+const SignIn:FC = () => {
 
     const [authState, setAuthState] = useState<ISignIn>({} as ISignIn)
 
@@ -21,7 +20,7 @@ const SignIn = () => {
 
     const dispatch = useAppDispatch()
 
-    //const {data: userResult, error, isLoading} = useLoginMutation(authState)
+    const [login, {data: userResult, error, isLoading}] = useLoginMutation()
 
     const defaultValues = signInField.reduce((values, field) => {
         values[field.name as keyof IAuthInput] = "";
@@ -30,10 +29,14 @@ const SignIn = () => {
 
     const {control, handleSubmit, formState: {errors}, getValues} = useForm<IAuthInput>({defaultValues: defaultValues})
 
-    const onSubmit: SubmitHandler<IAuthInput> = (data) => {
-        setAuthState(data)
+    const onSubmit: SubmitHandler<IAuthInput> = async (data) => {
+        try {
+            await login(data).unwrap()
 
-        //if(userResult) dispatch(updateUser(userResult))
+            console.log(userResult)
+        } catch(error) {
+                console.log(error)
+        }
     }
 
     function closePopupHandler(e:any) {
