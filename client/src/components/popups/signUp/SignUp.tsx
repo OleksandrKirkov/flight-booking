@@ -19,7 +19,7 @@ const SignUp = () => {
 
     const dispatch = useDispatch()
 
-    const [register, {data: userResult, error, isLoading}] = useRegisterMutation()
+    const [register, {error, isLoading}] = useRegisterMutation()
 
     const defaultValues = signUpFields.reduce((values, field) => {
         values[field.name as keyof IAuthInput] = "";
@@ -30,12 +30,11 @@ const SignUp = () => {
 
     const onSubmit: SubmitHandler<IAuthInput> = async (data) => {
         try {
-            console.log("register")
             setAuthState(data)
-            await register(data).unwrap()
+            const response = await register(data).unwrap()
 
-            if(userResult) console.log(userResult)
-            else console.log(error)
+            console.log(response)
+
         } catch (error) {
                 console.error(error)
             }

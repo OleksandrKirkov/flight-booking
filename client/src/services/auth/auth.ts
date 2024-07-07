@@ -55,9 +55,13 @@ export const authApi = createApi({
                 method: 'POST',
                 body: data
             }),
+
+            transformResponse: (response: ISignInResult) => {
+                localStorage.setItem('accessToken', response.accessToken)
+
+                return response 
+            }
         }),
-            //transformResponse: (response: {result: number; user: ISignInResult}) => {
-                //return response.user } }),
         //register
         register: builder.mutation<ISignUpResult, ISignUp>({
             query: (data) => ({
@@ -65,9 +69,12 @@ export const authApi = createApi({
                 method: 'POST',
                 body: data
             }),
-            //transformResponse: (response: {result: number; user: ISignUpResult}) => {
-                //return response.user
-            //}
+
+            transformResponse: (response: ISignUpResult) => {
+                localStorage.setItem('accessToken', response.accessToken)
+
+                return response
+            }
         }),
         //logout
         logout: builder.mutation<void, void>({
@@ -77,6 +84,10 @@ export const authApi = createApi({
                     method: 'POST'
                 }
             },
+
+            transformResponse: (response: void) => {
+                localStorage.removeItem('accessToken')
+            }
         })
     })
 })

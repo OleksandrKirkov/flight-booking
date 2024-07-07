@@ -20,7 +20,7 @@ const SignIn:FC = () => {
 
     const dispatch = useAppDispatch()
 
-    const [login, {data: userResult, error, isLoading}] = useLoginMutation()
+    const [login, {error, isLoading}] = useLoginMutation()
 
     const defaultValues = signInField.reduce((values, field) => {
         values[field.name as keyof IAuthInput] = "";
@@ -31,11 +31,11 @@ const SignIn:FC = () => {
 
     const onSubmit: SubmitHandler<IAuthInput> = async (data) => {
         try {
-            await login(data).unwrap()
+            const response = await login(data).unwrap()
 
-            console.log(userResult)
+            console.log(response, " => response")
         } catch(error) {
-                console.log(error)
+            console.log(error)
         }
     }
 
