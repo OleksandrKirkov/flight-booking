@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
     "babel-plugin-react-compiler": "^0.0.0-experimental-938cd9a-20240601",
+    "dotenv": "^16.4.5",
     "eslint-plugin-react-compiler": "^0.0.0-experimental-51a85ea-20240601",
     "react": "^19.0.0-beta-26f2496093-20240514",
     "react-dom": "^19.0.0-beta-26f2496093-20240514",
