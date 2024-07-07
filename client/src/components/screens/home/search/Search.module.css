@@ -1,7 +1,7 @@
 .search {}
 
 .search__top_container {
-    @apply flex items-center gap-2 py-2 bg-white dark:bg-zinc-900 border-b-2 border-solid border-zinc-200 dark:border-zinc-800;
+    @apply flex items-center gap-4 py-2 bg-white dark:bg-zinc-900 border-b-2 border-solid border-zinc-200 dark:border-zinc-800;
 }
 
 .search__bottom_container {
@@ -32,7 +32,8 @@
 }
 
 .search__checkbox {
-    @apply flex items-center gap-2 text-sm text-black dark:text-white transition-colors;
+    @apply flex items-center gap-2 text-sm text-black dark:text-white transition-colors 
+        cursor-pointer;
 }
 
 .search__checkbox.active {

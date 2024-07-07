@@ -2,7 +2,7 @@ import {MdOutlineSwapHoriz, MdToday} from "react-icons/md";
 import Container from "../../../layout/container/Container";
 import styles from "./Search.module.css"
 import {ButtonFill} from "../../../ui/buttons/Button";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import {Controller, SubmitHandler, useForm} from "react-hook-form"
 import {IFlightField, flightFields} from "../../../../assets/forms/flightFields";
 import {LuPlaneLanding, LuPlaneTakeoff} from "react-icons/lu";
@@ -26,7 +26,7 @@ const Search = () => {
         return values
     }, {} as ISearchFlight);
 
-    const { control, handleSubmit, formState: {errors}, getValues } = useForm<ISearchFlight>({defaultValues: defaultValues})
+    const { control, handleSubmit, formState: {errors}, getValues, setValue } = useForm<ISearchFlight>({defaultValues: defaultValues})
 
     const onSubmit: SubmitHandler<ISearchFlight> = (data) => {
         setSearchDataState(data)
@@ -34,20 +34,30 @@ const Search = () => {
         if(flightResult) dispatch(updateFlight(flightResult))
     }
 
+    function swapHandler(e: any) {
+        e.preventDefault();
+
+        const departureValue = getValues('departure_city')
+        const arrivalValue = getValues('arrival_city')
+
+        setValue('departure_city', arrivalValue);
+        setValue('arrival_city', departureValue);
+    }
+
     return (
         <div className={styles.search}>
             <div className={styles.search__top}>
                 <Container className={styles.search__top_container}>
-                    <div className={`${styles.search__checkbox} ${searchTypeState == 'one'?styles.active:''}`}>
+                    <label htmlFor="search_checkbox" className={`${styles.search__checkbox} ${searchTypeState == 'one'?styles.active:''}`}>
                         <input type="radio" name="search" id="search_checkbox" onChange={e => setSearchTypeState('one')}/>
                         <div className={styles.search__checkbox_input}><span></span></div>
-                        <label className={styles.search__label} htmlFor="search_checkbox">One way</label>
-                    </div>
-                    <div className={`${styles.search__checkbox} ${searchTypeState == 'round'?styles.active:''}`}>
+                        <span className={styles.search__label}>One way</span>
+                    </label>
+                    <label htmlFor="search_checkbox_round" className={`${styles.search__checkbox} ${searchTypeState == 'round'?styles.active:''}`}>
                         <input type="radio" name="search" id="search_checkbox_round" onChange={e => setSearchTypeState('round')}/>
                         <div className={styles.search__checkbox_input}><span></span></div>
-                        <label className={styles.search__label} htmlFor="search_checkbox_round">Round Trip</label>
-                    </div>
+                        <span className={styles.search__label}>Round Trip</span>
+                    </label>
                 </Container>
             </div>
             <form className={styles.search__bottom} onSubmit={handleSubmit(onSubmit)}>
@@ -107,7 +117,7 @@ const Search = () => {
                                     </label>
                                     {
                                         index == 0 ? (
-                                            <button className={styles.search__swap}>
+                                            <button onClick={swapHandler} className={styles.search__swap}>
                                                 <MdOutlineSwapHoriz />
                                             </button>
                                         ) : undefined
